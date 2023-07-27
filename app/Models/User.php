@@ -28,7 +28,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'image'
+        'image',
+        'role_id'
     ];
 
     /**
@@ -59,5 +60,15 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function hasAnyRole($roles)
+    {
+        return in_array($this->role, $roles);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

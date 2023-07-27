@@ -34,3 +34,18 @@ Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->nam
 Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('edit');
 Route::post('/update', [App\Http\Controllers\HomeController::class, 'update'])->name('update');
 Route::get('/destroy/{id}', [App\Http\Controllers\HomeController::class, 'destroy'])->name('destroy');
+
+Route::get('/admin/dashboard', function () {
+    // Your admin dashboard logic here
+})->middleware('role:admin');
+
+Route::get('/products', [App\Http\Controllers\HomeController::class, 'products'])->name('products');
+Route::get('/addproduct', [App\Http\Controllers\HomeController::class, 'addproduct'])->name('addproduct');
+Route::post('/addproductdetail', [App\Http\Controllers\HomeController::class, 'addproductdetail'])->name('addproductdetail');
+Route::get('/editproduct/{id}', [App\Http\Controllers\HomeController::class, 'editproduct'])->name('editproduct');
+Route::get('/destroyproduct/{id}', [App\Http\Controllers\HomeController::class, 'destroyproduct'])->name('destroyproduct');
+Route::post('/updateproduct', [App\Http\Controllers\HomeController::class, 'updateproduct'])->name('updateproduct');
+
+
+
+

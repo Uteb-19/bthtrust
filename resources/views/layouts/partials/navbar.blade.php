@@ -4,18 +4,23 @@
       <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
       </a>
+      <?php $role_id=''; if(isset(\Auth::user()->role_id)) $role_id = \Auth::user()->role_id;  ?>
 
+      <?php if(isset($role_id) && $role_id == 1) { ?>
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="{{ route('home') }}" class="nav-link px-2 text-secondary">Home</a></li>
         <li><a href="{{ route('users') }}" class="nav-link px-2 text-white">Users</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        <li><a href="{{ route('products') }}" class="nav-link px-2 text-white">Products</a></li>
       </ul>
+      <?php } elseif($role_id == 2) { ?>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{{ route('home') }}" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="{{ route('products') }}" class="nav-link px-2 text-white">Products</a></li>
+        </ul>
+      <?php } else { }?>
 
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-      </form>
+      
+      <h1><?php if(isset($role_id) && $role_id == 1) { echo 'Admin'; } elseif($role_id == 2) { echo 'User'; } else { echo ''; }?></h1>
 
       @auth
         {{auth()->user()->name}}
